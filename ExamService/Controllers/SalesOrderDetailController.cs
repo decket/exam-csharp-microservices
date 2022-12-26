@@ -23,7 +23,7 @@ public class SalesOrderDetailController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<SalesOrderDetailReadDto>> GetFlights()
+    public ActionResult<IEnumerable<SalesOrderDetailReadDto>> GetSalesOrders()
     {
         Console.WriteLine("--> Getting SalesOrderDetailItems....");
 
@@ -41,8 +41,8 @@ public class SalesOrderDetailController : ControllerBase
         return NotFound();
     }
 
-    [HttpPost]
-    public async Task<ActionResult<SalesOrderDetailReadDto>> CreateFlight(
+     [HttpGet(Name = "PostCreateSalesOrder")]
+     public async Task<ActionResult<SalesOrderDetailReadDto>> CreateSalesOrder(
         SalesOrderDetailCreateDto salesOrderDetailCreateDto)
     {
         var salesOrderDetailModel = _mapper.Map<SalesOrderDetail>(salesOrderDetailCreateDto);
@@ -50,15 +50,6 @@ public class SalesOrderDetailController : ControllerBase
         _repository.SaveChanges();
 
         var salesOrderDetailModelReadDto = _mapper.Map<SalesOrderDetailReadDto>(salesOrderDetailModel);
-
-        try
-        {
-            // await _bookingDataClient.SendReisToCommand(reisReadDto);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"--> Could not send synchronously: {ex.Message}");
-        }
 
         return CreatedAtRoute(nameof(GetSalesById), new { id = salesOrderDetailCreateDto.SalesOrderId },
             salesOrderDetailModelReadDto);

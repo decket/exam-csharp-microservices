@@ -39,7 +39,16 @@ namespace ExamService.Data
                 context.SalesOrderDetails.AddRange(
                     new SalesOrderDetail()
                     {
-                        
+                      SalesOrderId = 0,
+                      SalesOrderDetailId = 0,
+                      OrderQty = 1,
+                      ProductId = 0,
+                      SpecialOfferId = 0,
+                      UnitPrice = 120,
+                      UnitPriceDiscount = 20,
+                      LineTotal = 's',
+                      Rowguid = 0,
+                      ModifiedDate = new DateTime()
                     }
                 );
 
