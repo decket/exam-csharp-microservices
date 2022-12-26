@@ -4,7 +4,7 @@ namespace ExamService.Dtos
 {
     public class SalesOrderDetailReadDto
     {
-        public int id { get; set; }
+        public int SalesOrderId { get; set; }
 
         public int OrderQty { get; set; }
 
@@ -14,7 +14,7 @@ namespace ExamService.Dtos
 
         public int LineTotal { get; set; }
 
-        public int rowguid { get; set; }
+        public int Rowguid { get; set; }
 
         public int ModifiedDate { get; set; }
     }

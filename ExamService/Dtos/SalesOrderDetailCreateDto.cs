@@ -4,6 +4,8 @@ namespace ExamService.Dtos
 {
     public class SalesOrderDetailCreateDto
     {
+        public int SalesOrderId { get; set; }
+        
         public int OrderQty { get; set; }
 
         public int UnitPrice { get; set; }
