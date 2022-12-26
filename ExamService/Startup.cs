@@ -14,10 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using FlightService.Data;
-using FlightService.SyncDataServices.Http;
+using ExamService.Data;
 
-namespace PlatformService
+namespace ExamService
 {
   public class Startup
   {
@@ -30,7 +29,6 @@ namespace PlatformService
       _env = env;
     }
 
-
     public void ConfigureServices(IServiceCollection services)
     {
 
@@ -38,9 +36,9 @@ namespace PlatformService
       services.AddDbContext<AppDbContext>(opt =>
           opt.UseSqlServer(Configuration.GetConnectionString("DatabaseConnectionString")));
 
-      services.AddScoped<IFlightRepo, FlightRepo>();
+      services.AddScoped<ISalesOrderDetailsRepo, SalesOrderDetailsRepo>();
 
-      services.AddHttpClient<IBookingnDataClient, HttpBookingDataClient>();
+      // services.AddHttpClient<IBookingnDataClient, HttpBookingDataClient>();
       services.AddControllers();
       services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
       services.AddSwaggerGen(c =>
@@ -71,7 +69,7 @@ namespace PlatformService
       {
         endpoints.MapControllers();
 
-        endpoints.MapGet("/protos/fligts.proto", async context =>
+        endpoints.MapGet("/protos/exam.proto", async context =>
               {
                 await context.Response.WriteAsync(File.ReadAllText("Protos/platforms.proto"));
               });
